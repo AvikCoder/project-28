@@ -21,7 +21,7 @@ function setup() {
 	//Create the Bodies Here.
 	aa = new normal();
 	ground  = new normal(400,670,800,20)
-	stone1 = new Stone(70,550,80,80)
+	stone1 = new Stone(70,560,80,80)
 	slingSS = new SlingShot(stone1.body,{x:70,y:560})
 	mango1 = new Mango(550,420,50,50)
 	mango2 = new Mango(450,440,50,50)
@@ -71,7 +71,13 @@ function detectCollision(lstone,lmango){
 	stoneBodyPosition = lstone.body.position
 
 	var distance = dist(stoneBodyPosition.x,stoneBodyPosition.y,mangoBodyPosition.x,mangoBodyPosition.y)
-	if(distance<=lmango.r+lstone.r){
+	if(distance<=lmango.radius/10+lstone.radius){
 		Matter.Body.setStatic(lmango.body,false)
+	}
+}
+function keyPressed(){
+	if(keyCode == 32){
+		Matter.Body.setPosition(stone1.body,{x:70,y:560});
+		slingSS.attach(stone1.body);
 	}
 }
